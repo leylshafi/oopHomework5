@@ -30,8 +30,6 @@ public:
 	myString append(const char* text);
 	int compare(const myString right);
 	myString subString(int a, int b);
-	void swap(myString string);////?????????
-	myString erase(int a, int b);
 	const char* print() const { 
 		if (_text == nullptr)
 			return "";
@@ -41,9 +39,7 @@ public:
 	~myString();
 };
 
-myString::myString() {
-	//_text = new char[_capacity];
-}
+myString::myString() = default;
 
 myString::myString(const char* text)
 	:myString()
@@ -77,14 +73,14 @@ myString& myString::operator=(const myString& other) {
 
 
 myString::myString(myString&& other) noexcept {
-	// cout << "Move constructor\n";
+	cout << "Move constructor\n";
 
 	_text = other._text;
 	other._text = nullptr;
 }
 
 myString& myString::operator=(myString&& other) noexcept {
-	// cout << "Move Assigment operator\n";
+	 cout << "Move Assigment operator\n";
 
 	if (_text != nullptr)
 		delete _text;
@@ -202,43 +198,8 @@ myString myString::subString(int a, int b) {
 	return temp;
 }
 
-void myString::swap(myString string) {
-	myString temp;
-	temp.setText(_text);
-	setText(string._text);
-	string.setText(_text);
-}
-
-myString myString::erase(int idx, int count) {
-	myString temp;
-	temp._text = new char[_length] {};
-	size_t a = 0;
-	for (size_t i = 0; i < _length; i++)
-	{
-		for (size_t j = idx; j < idx+count; j++)
-		{
-			if (i == j)
-				continue;
-
-		}
-		temp._text[a++] = _text[i];
-	}
-	temp.setText(temp._text);
-	return temp;
-}
-
-
-
-
-
-
-
-
 
 myString::~myString(){
 	//cout << "Destructor for -> " << (_text?_text:"null") << endl;
 	delete _text;
 }
-
-/// default constructoru yaz
-/// umumi check ele
