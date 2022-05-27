@@ -30,6 +30,8 @@ public:
 	myString append(const char* text);
 	int compare(const myString right);
 	myString subString(int a, int b);
+	void push_back(char ch);
+	void pop_back();
 	const char* print() const { 
 		if (_text == nullptr)
 			return "";
@@ -198,7 +200,26 @@ myString myString::subString(int a, int b) {
 	return temp;
 }
 
+void myString::push_back(char ch) {
+	char*temp = new char[_length + 2]{};
+	for (size_t i = 0; i < _length; i++)
+	{
+		temp[i] = _text[i];
+	}
+	temp[_length] = ch;
+	delete[]_text;
+	_text = temp;
+}
 
+void myString::pop_back() {
+	char* temp = new char[_length]{};
+	for (size_t i = 0; i < _length-1; i++)
+	{
+		temp[i] = _text[i];
+	}
+	delete[]_text;
+	_text = temp;
+}
 myString::~myString(){
 	//cout << "Destructor for -> " << (_text?_text:"null") << endl;
 	delete _text;
